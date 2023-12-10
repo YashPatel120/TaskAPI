@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Task</title>
+    <link rel="stylesheet" type="text/css" href="../public/style.css">
+
+</head>
+<body>
+    <h1>Edit Task</h1>
+    <form method="POST" action="/tasks/<%= task._id %>?_method=PUT">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" value="<%= task.title %>" required>
+        
+        <label for="priority">Priority:</label>
+        <select id="priority" name="priority">
+            <option value="high" <%= task.priority === 'high' ? 'selected' : '' %>>High</option>
+            <option value="medium" <%= task.priority === 'medium' ? 'selected' : '' %>>Medium</option>
+            <option value="low" <%= task.priority === 'low' ? 'selected' : '' %>>Low</option>
+        </select>
+        
+        <label for="dueDate">Due Date:</label>
+        <input type="date" id="dueDate" name="dueDate" value="<%= task.dueDate ? task.dueDate.toISOString().split('T')[0] : '' %>">
+        
+        <label for="labels">Labels (comma-separated):</label>
+        <input type="text" id="labels" name="labels" value="<%= task.labels.join(', ') %>">
+        
+        <label for="completed">Status:</label>
+        <input type="checkbox" id="completed" name="completed" <%= task.completed ? 'checked' : '' %>>
+        <label for="completed">Completed</label>
+        
+        <button type="submit">Update Task</button>
+    </form>
+    <a href="/dashboard">Back to Dashboard</a>
+</body>
+</html>

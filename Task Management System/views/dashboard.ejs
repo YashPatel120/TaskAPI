@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="../public/style.css">
+
+</head>
+<body>
+    <h1>Welcome to Your Dashboard</h1>
+    <ul>
+        <% tasks.forEach(task => { %>
+            <li>
+                <strong><%= task.title %></strong>
+                <p>Priority: <%= task.priority %></p>
+                <p>Due Date: <%= task.dueDate ? task.dueDate.toDateString() : 'Not set' %></p>
+                <p>Status: <%= task.completed ? 'Completed' : 'In Progress' %></p>
+                <p>Labels: <%= task.labels.join(', ') %></p>
+                <form method="POST" action="/tasks/<%= task._id %>?_method=DELETE">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        <% }) %>
+    </ul>
+    <a href="/logout">Logout</a>
+    <script src="/dashboard.js"></script>
+</body>
+</html>
